@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="me.shrikanthravi.india.covid19app">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:name=".covid19app"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="Covid-19 India Tracker"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true"
+        tools:replace="android:label">
+        <activity android:name=".ui.helpline.HelplineActivity"/>
+        <activity android:name=".ui.precaution.PrecautionActivity" />
+        <activity android:name=".ui.state.StateViewActivity" />
+        <activity android:name=".ui.home.HomeActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".MainActivity" />
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
+    </application>
+
+</manifest>
