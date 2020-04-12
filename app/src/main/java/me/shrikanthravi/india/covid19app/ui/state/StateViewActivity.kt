@@ -54,6 +54,9 @@ class StateViewActivity : AppCompatActivity() {
         binding.imageBack.setOnClickListener {
             onBackPressed()
         }
+        binding.layoutError.setOnClickListener {
+            viewModel.getStats(stats.state)
+        }
     }
 
     private fun setObserver() {

@@ -82,12 +82,9 @@ class HomeActivity : AppCompatActivity() {
     lateinit var stats: Stats
     private fun updateUI() {
         if (!stats.statewise.isNullOrEmpty()) {
-            var newConfirmed =
-                stats.statewise[0].confirmed.toInt() - stats.casesTimeSeries[stats.casesTimeSeries.size - 1].totalconfirmed.toInt()
-            var newRecovered =
-                stats.statewise[0].recovered.toInt() - stats.casesTimeSeries[stats.casesTimeSeries.size - 1].totalrecovered.toInt()
-            var newDeceased =
-                stats.statewise[0].deaths.toInt() - stats.casesTimeSeries[stats.casesTimeSeries.size - 1].totaldeceased.toInt()
+            var newConfirmed = stats.casesTimeSeries[stats.casesTimeSeries.size - 1].dailyconfirmed.toInt()
+            var newRecovered = stats.casesTimeSeries[stats.casesTimeSeries.size - 1].dailyrecovered.toInt()
+            var newDeceased = stats.casesTimeSeries[stats.casesTimeSeries.size - 1].dailydeceased.toInt()
             if (newConfirmed >= 0) {
                 binding.textConfirmedTitle.text = "CONFIRMED  [+" + newConfirmed + "]"
             } else {
