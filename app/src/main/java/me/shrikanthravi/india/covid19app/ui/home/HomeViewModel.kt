@@ -7,7 +7,7 @@ import kotlinx.coroutines.withContext
 import me.shrikanthravi.india.covid19app.data.local.Resource
 import me.shrikanthravi.india.covid19app.data.model.Stats
 import me.shrikanthravi.india.covid19app.data.retrofit.CustomAppRepository
-import me.shrikanthravi.india.covid19app.data.retrofit.NoConnectivityException
+import java.net.UnknownHostException
 
 
 class HomeViewModel(private val productRepository: CustomAppRepository) : ViewModel() {
@@ -25,7 +25,7 @@ class HomeViewModel(private val productRepository: CustomAppRepository) : ViewMo
                 performFetchStats.value = Resource.success(response)
             } catch (e: Exception) {
                 println("fetch stats failed ${e.message}")
-                if (e is NoConnectivityException) {
+                if (e is UnknownHostException) {
                     performFetchStats.value = Resource.offlineError()
                 } else {
                     performFetchStats.value = Resource.error(e)

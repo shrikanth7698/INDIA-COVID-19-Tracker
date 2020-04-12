@@ -14,19 +14,19 @@ import me.shrikanthravi.india.covid19app.R
 
 class HelplineAdapter(private val states : ArrayList<Helpline>,
                       private val context: Context,
-                      val itemClickListener: OnItemClickListener) : RecyclerView.Adapter<HelplineAdapter.StateViewHolder>()  {
+                      val itemClickListener: OnItemClickListener) : RecyclerView.Adapter<HelplineAdapter.HelplineViewHolder>()  {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StateViewHolder {
-        return StateViewHolder(LayoutInflater.from(context).inflate(R.layout.item_helpline, parent, false))
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HelplineViewHolder {
+        return HelplineViewHolder(LayoutInflater.from(context).inflate(R.layout.item_helpline, parent, false))
     }
 
     override fun getItemCount() = states.size
 
-    override fun onBindViewHolder(holder: StateViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: HelplineViewHolder, position: Int) {
         holder.bind(states[position],holder.adapterPosition,itemClickListener)
     }
 
-    class StateViewHolder (view: View) : RecyclerView.ViewHolder(view) {
+    class HelplineViewHolder (view: View) : RecyclerView.ViewHolder(view) {
 
         val cardState = view.card_state
         val textState = view.text_state

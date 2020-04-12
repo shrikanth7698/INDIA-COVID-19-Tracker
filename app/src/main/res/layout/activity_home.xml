@@ -7,7 +7,7 @@
 
     </data>
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
@@ -20,14 +20,16 @@
             android:background="@color/red"
             android:fontFamily="@font/pt_sans_bold"
             android:padding="16dp"
-            android:text="INDIA COVID-19 TRACKER"
+            android:text="@string/app_name_title"
             android:textColor="@color/white"
             android:textSize="18sp"
             android:textStyle="bold" />
 
         <androidx.core.widget.NestedScrollView
+            android:id="@+id/layout_content"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_below="@id/text_app_name"
             android:fillViewport="true">
 
             <LinearLayout
@@ -100,6 +102,7 @@
                                 android:layout_height="match_parent"
                                 android:background="#40000000"
                                 android:orientation="vertical">
+
                                 <ImageView
                                     android:layout_width="32dp"
                                     android:layout_height="32dp"
@@ -150,11 +153,10 @@
                                 android:fontFamily="@font/pt_sans_bold"
                                 android:gravity="start|bottom"
                                 android:padding="8dp"
-                                android:text="Protective measures against COVID-19"
+                                android:text="@string/label_protective_measure"
                                 android:textColor="@color/white"
                                 android:textSize="18sp" />
                         </com.google.android.material.card.MaterialCardView>
-
 
 
                     </LinearLayout>
@@ -182,7 +184,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="start"
                             android:fontFamily="@font/pt_sans_bold"
-                            android:text="Last Updated"
+                            android:text="@string/label_last_updated"
                             android:textColor="@color/black"
                             android:textSize="20sp"
                             android:textStyle="bold" />
@@ -195,7 +197,7 @@
                             android:fontFamily="@font/pt_sans"
                             android:textColor="@color/green"
                             android:textSize="12sp"
-                            tools:text="Updated 2h ago" />
+                            tools:text="@string/sample_update_time" />
                     </LinearLayout>
 
                     <ImageView
@@ -248,7 +250,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/pt_sans_bold"
-                                android:text="CONFIRMED"
+                                android:text="@string/label_confirmed"
                                 android:textColor="@color/red"
                                 android:textSize="14sp"
                                 android:textStyle="bold" />
@@ -299,7 +301,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/pt_sans_bold"
-                                android:text="ACTIVE"
+                                android:text="@string/label_active"
                                 android:textColor="@color/blue"
                                 android:textSize="14sp"
                                 android:textStyle="bold" />
@@ -358,7 +360,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/pt_sans_bold"
-                                android:text="RECOVERED"
+                                android:text="@string/label_recovered"
                                 android:textColor="@color/green"
                                 android:textSize="14sp"
                                 android:textStyle="bold" />
@@ -409,7 +411,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/pt_sans_bold"
-                                android:text="DECEASED"
+                                android:text="@string/label_deceased"
                                 android:textColor="@color/gray"
                                 android:textSize="14sp"
                                 android:textStyle="bold" />
@@ -465,7 +467,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="8dp"
                                 android:fontFamily="@font/pt_sans_bold"
-                                android:text="Helpline\nnumbers"
+                                android:text="@string/label_helpline_numbers"
                                 android:textColor="@color/black"
                                 android:textSize="18sp"
                                 android:textStyle="bold" />
@@ -505,7 +507,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="8dp"
                                 android:fontFamily="@font/pt_sans_bold"
-                                android:text="Helpful\nLinks"
+                                android:text="@string/label_helpful_links"
                                 android:textColor="@color/black"
                                 android:textSize="18sp"
                                 android:textStyle="bold" />
@@ -531,7 +533,7 @@
                         android:layout_gravity="center"
                         android:layout_weight="1"
                         android:fontFamily="@font/pt_sans_bold"
-                        android:text="State Wise Stats"
+                        android:text="@string/label_state_wise_stats"
                         android:textColor="@color/black"
                         android:textSize="20sp"
                         android:textStyle="bold" />
@@ -558,5 +560,70 @@
             </LinearLayout>
 
         </androidx.core.widget.NestedScrollView>
-    </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/layout_states"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/text_app_name"
+            android:alpha="1"
+            android:background="@color/white"
+            android:clickable="true"
+            android:focusable="true"
+            android:visibility="visible">
+
+            <LinearLayout
+                android:id="@+id/layout_loading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_margin="16dp"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <ProgressBar
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:layout_gravity="center"
+                    android:indeterminate="true"
+                    android:indeterminateTint="@color/red" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="16dp"
+                    android:fontFamily="@font/pt_sans_bold"
+                    android:text="@string/label_loading" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layout_error"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_margin="16dp"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <ImageView
+                    android:id="@+id/image_error"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_info_black_24dp"/>
+
+                <TextView
+                    android:id="@+id/text_error_message"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="16dp"
+                    android:fontFamily="@font/pt_sans_bold"
+                    android:gravity="center"
+                    tools:text="Something went wrong" />
+            </LinearLayout>
+
+        </RelativeLayout>
+    </RelativeLayout>
 </layout>

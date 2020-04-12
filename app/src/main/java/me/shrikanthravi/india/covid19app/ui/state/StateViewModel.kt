@@ -8,7 +8,7 @@ import me.shrikanthravi.india.covid19app.data.local.Resource
 import me.shrikanthravi.india.covid19app.data.model.StateDistrictWise
 import me.shrikanthravi.india.covid19app.data.model.Stats
 import me.shrikanthravi.india.covid19app.data.retrofit.CustomAppRepository
-import me.shrikanthravi.india.covid19app.data.retrofit.NoConnectivityException
+import java.net.UnknownHostException
 
 
 class StateViewModel(private val productRepository: CustomAppRepository) : ViewModel() {
@@ -24,19 +24,19 @@ class StateViewModel(private val productRepository: CustomAppRepository) : ViewM
                 performFetchStats.value = Resource.loading()
                 val response = productRepository.getDistrictStats()
                 var found = false
-                for(i in response){
-                    if(i.state==state){
+                for (i in response) {
+                    if (i.state == state) {
                         found = true
                         performFetchStats.value = Resource.success(i)
                         break
                     }
                 }
-                if(!found){
-                    performFetchStats.value = Resource.error(null)
+                if (!found) {
+                    performFetchStats.value = Resource.error(null, message = "No data found")
                 }
             } catch (e: Exception) {
                 println("fetch district stats failed ${e.message}")
-                if (e is NoConnectivityException) {
+                if (e is UnknownHostException) {
                     performFetchStats.value = Resource.offlineError()
                 } else {
                     performFetchStats.value = Resource.error(e)

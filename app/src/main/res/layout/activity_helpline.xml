@@ -38,7 +38,7 @@
                 android:layout_gravity="center"
                 android:fontFamily="@font/pt_sans_bold"
                 android:padding="12dp"
-                android:text="Helpline numbers"
+                android:text="@string/title_helpline"
                 android:textColor="@color/white"
                 android:textSize="18sp"
                 android:textStyle="bold" />

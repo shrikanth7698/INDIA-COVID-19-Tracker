@@ -3,6 +3,7 @@ package me.shrikanthravi.india.covid19app.ui.state
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -57,28 +58,7 @@ class StateViewActivity : AppCompatActivity() {
 
     private fun setObserver() {
         viewModel.performFetchStatsStatus.observe(this, Observer {
-            if (it != null) {
-                when (it.status) {
-                    Resource.Status.SUCCESS -> {
-                        if (it.data != null) {
-                            districtList.clear()
-                            if(!it.data.districtData.isNullOrEmpty()){
-                                districtList.addAll(it.data.districtData)
-                            }
-                            updateUI()
-                        }
-                    }
-                    Resource.Status.OFFLINE_ERROR -> {
-
-                    }
-                    Resource.Status.ERROR -> {
-
-                    }
-                    Resource.Status.LOADING -> {
-
-                    }
-                }
-            }
+            handleStateView(it)
         })
     }
 
@@ -105,5 +85,48 @@ class StateViewActivity : AppCompatActivity() {
             binding.recyclerDistrict.adapter = adapter
         }
 
+    }
+
+    private fun handleStateView(resource: Resource<StateDistrictWise>){
+        when(resource.status){
+            Resource.Status.LOADING -> {
+                binding.layoutStates.visibility = View.VISIBLE
+                binding.layoutStates.alpha = 1f
+                binding.layoutLoading.visibility = View.VISIBLE
+                binding.layoutError.visibility = View.GONE
+            }
+            Resource.Status.SUCCESS -> {
+                binding.layoutStates.animate().alpha(0f).setDuration(1000).withEndAction {
+                    binding.layoutStates.visibility = View.GONE
+                }.start()
+                if (resource.data != null) {
+                    districtList.clear()
+                    if(!resource.data.districtData.isNullOrEmpty()){
+                        districtList.addAll(resource.data.districtData)
+                    }
+                    updateUI()
+                }
+            }
+
+            Resource.Status.OFFLINE_ERROR -> {
+                binding.layoutStates.visibility = View.VISIBLE
+                binding.layoutStates.alpha = 1f
+                binding.layoutLoading.visibility = View.GONE
+                binding.layoutError.visibility = View.VISIBLE
+                binding.textErrorMessage.text = "No Internet Connection!\nTap to retry"
+            }
+            Resource.Status.ERROR -> {
+                binding.layoutStates.visibility = View.VISIBLE
+                binding.layoutStates.alpha = 1f
+                binding.layoutLoading.visibility = View.GONE
+                binding.layoutError.visibility = View.VISIBLE
+                if(!resource.message.isNullOrEmpty()){
+                    binding.textErrorMessage.text = resource.message
+                }else{
+                    binding.textErrorMessage.text = "Something went wrong!\nTap to retry!"
+                }
+
+            }
+        }
     }
 }

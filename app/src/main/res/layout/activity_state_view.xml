@@ -7,7 +7,7 @@
 
     </data>
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
@@ -17,6 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/red"
+            android:id="@+id/toolbar"
             android:orientation="horizontal">
 
             <ImageView
@@ -41,12 +42,13 @@
                 android:id="@+id/text_update_time"
                 android:textSize="18sp"
                 android:textStyle="bold"
-                tools:text="1h ago" />
+                android:text="State Details" />
         </LinearLayout>
 
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_below="@id/toolbar"
             android:fillViewport="true">
 
             <LinearLayout
@@ -293,5 +295,70 @@
             </LinearLayout>
 
         </androidx.core.widget.NestedScrollView>
-    </LinearLayout>
+        <RelativeLayout
+            android:id="@+id/layout_states"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/toolbar"
+            android:alpha="1"
+            android:background="@color/white"
+            android:clickable="true"
+            android:focusable="true"
+            android:visibility="visible">
+
+            <LinearLayout
+                android:id="@+id/layout_loading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_margin="16dp"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <ProgressBar
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:layout_gravity="center"
+                    android:indeterminate="true"
+                    android:indeterminateTint="@color/red" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="16dp"
+                    android:fontFamily="@font/pt_sans_bold"
+                    android:text="Loading" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layout_error"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_margin="16dp"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <ImageView
+                    android:id="@+id/image_error"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_info_black_24dp" />
+
+                <TextView
+                    android:id="@+id/text_error_message"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="16dp"
+                    android:fontFamily="@font/pt_sans_bold"
+                    android:gravity="center"
+                    tools:text="Something went wrong" />
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
 </layout>

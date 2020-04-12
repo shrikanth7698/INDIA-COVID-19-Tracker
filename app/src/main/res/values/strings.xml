@@ -16,4 +16,24 @@
     <string name="description_clean_disinfect">
         1. Clean AND disinfect frequently touched surfaces daily. This includes tables, doorknobs, light switches, countertops, handles, desks, phones, keyboards, toilets, faucets, and sinks.\n\n2. If surfaces are dirty, clean them: Use detergent or soap and water prior to disinfection.
     </string>
+    <string name="title_helpline">Helpline numbers</string>
+    <string name="app_name_title">INDIA COVID-19 TRACKER</string>
+    <string name="label_protective_measure">Protective measures against COVID-19</string>
+    <string name="label_last_updated">Last Updated</string>
+    <string name="sample_update_time">Updated 2h ago</string>
+    <string name="label_confirmed">CONFIRMED</string>
+    <string name="label_active">ACTIVE</string>
+    <string name="label_recovered">RECOVERED</string>
+    <string name="label_deceased">DECEASED</string>
+    <string name="label_helpline_numbers">Helpline\nnumbers</string>
+    <string name="label_helpful_links">Helpful\nLinks</string>
+    <string name="label_state_wise_stats">State Wise Stats</string>
+    <string name="label_loading">Loading</string>
+    <string name="title_precaution">Precaution</string>
+    <string name="title_clean_your_hands_often">Clean your hands often</string>
+    <string name="title_avoid_close_contact">Avoid close contact</string>
+    <string name="label_cover_your_mouth">Cover your mouth and nose with a cloth face cover when around others</string>
+    <string name="label_cover_coughs_and_sneezes">Cover coughs and sneezes</string>
+    <string name="label_clean_and_disinfect">Clean and disinfect</string>
+    <string name="label_disinfection_guide">Disinfection Guide</string>
 </resources>

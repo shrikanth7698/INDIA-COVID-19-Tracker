@@ -6,9 +6,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 import me.shrikanthravi.india.covid19app.data.local.Resource
-import me.shrikanthravi.india.covid19app.data.model.Stats
 import me.shrikanthravi.india.covid19app.data.retrofit.CustomAppRepository
-import me.shrikanthravi.india.covid19app.data.retrofit.NoConnectivityException
+import java.net.UnknownHostException
 
 
 class HelplineViewModel(private val productRepository: CustomAppRepository) : ViewModel() {
@@ -26,7 +25,7 @@ class HelplineViewModel(private val productRepository: CustomAppRepository) : Vi
                 performFetchNumbers.value = Resource.success(response)
             } catch (e: Exception) {
                 println("fetch numbers failed ${e.message}")
-                if (e is NoConnectivityException) {
+                if (e is UnknownHostException) {
                     performFetchNumbers.value = Resource.offlineError()
                 } else {
                     performFetchNumbers.value = Resource.error(e)

@@ -4,6 +4,7 @@ import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
@@ -67,29 +68,14 @@ class HomeActivity : AppCompatActivity() {
         binding.cardLink.setOnClickListener {
 
         }
+        binding.layoutError.setOnClickListener {
+            viewModel.getStats()
+        }
     }
 
     private fun setObserver() {
         viewModel.performFetchStatsStatus.observe(this, Observer {
-            if (it != null) {
-                when (it.status) {
-                    Resource.Status.SUCCESS -> {
-                        if (it.data != null) {
-                            stats = it.data
-                            updateUI()
-                        }
-                    }
-                    Resource.Status.OFFLINE_ERROR -> {
-
-                    }
-                    Resource.Status.ERROR -> {
-
-                    }
-                    Resource.Status.LOADING -> {
-
-                    }
-                }
-            }
+                handleStateView(it)
         })
     }
 
@@ -230,6 +216,37 @@ class HomeActivity : AppCompatActivity() {
             startActivity(intentApp)
         } catch (ex: ActivityNotFoundException) {
             startActivity(intentBrowser)
+        }
+    }
+
+    private fun handleStateView(resource: Resource<Stats>){
+        when(resource.status){
+            Resource.Status.LOADING -> {
+                binding.layoutStates.visibility = View.VISIBLE
+                binding.layoutStates.alpha = 1f
+                binding.layoutLoading.visibility = View.VISIBLE
+                binding.layoutError.visibility = View.GONE
+            }
+            Resource.Status.SUCCESS -> {
+                binding.layoutStates.animate().alpha(0f).setDuration(1000).withEndAction {
+                    binding.layoutStates.visibility = View.GONE
+                }.start()
+                if (resource.data != null) {
+                    stats = resource.data
+                    updateUI()
+                }
+            }
+
+            Resource.Status.OFFLINE_ERROR -> {
+                binding.layoutLoading.visibility = View.GONE
+                binding.layoutError.visibility = View.VISIBLE
+                binding.textErrorMessage.text = "No Internet Connection!\nTap to retry"
+            }
+            Resource.Status.ERROR -> {
+                binding.layoutLoading.visibility = View.GONE
+                binding.layoutError.visibility = View.VISIBLE
+                binding.textErrorMessage.text = "Something went wrong!\nTap to retry!"
+            }
         }
     }
 }
